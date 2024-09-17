@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const ActiveBetsPage = () => {
   const activeBets = useSelector((state) => state.bets.activeBets);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_ACTIVE_BETS_REQUEST' });
   }, [dispatch]);
 
   const handleAddBet = () => {
-    navigate('/add-bet');
+    history.push('/add-bet');
   };
 
   const handleSeeHistory = () => {
-    navigate('/bet-history');
+    history.push('/bet-history');
   };
 
   return (

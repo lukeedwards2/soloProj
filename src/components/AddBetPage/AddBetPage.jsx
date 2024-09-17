@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const AddBetPage = () => {
   const [sportsbook, setSportsbook] = useState('');
@@ -10,14 +10,14 @@ const AddBetPage = () => {
   const [propNumber, setPropNumber] = useState('');
   const [amount, setAmount] = useState('');
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const handleAddBet = () => {
     dispatch({
       type: 'ADD_BET_REQUEST',
       payload: { sportsbook, sport, player, propType, propNumber, amount },
     });
-    navigate('/active-bets'); 
+    history.push('/active-bets'); 
   };
 
   return (
@@ -60,7 +60,7 @@ const AddBetPage = () => {
         onChange={(e) => setAmount(e.target.value)}
       />
       <button onClick={handleAddBet}>Add Bet</button>
-      <button onClick={() => navigate('/active-bets')}>Go Back to Home</button>
+      <button onClick={() => history.push('/active-bets')}>Go Back to Home</button>
     </div>
   );
 };

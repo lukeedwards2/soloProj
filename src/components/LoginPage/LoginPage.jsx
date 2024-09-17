@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import LoginForm from '../LoginForm/LoginForm';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const handleLogin = () => {
     dispatch({
       type: 'LOGIN_REQUEST',
       payload: { username, password },
     });
-    navigate('/active-bets'); 
+    history.push('/active-bets'); 
   };
 
   return (
@@ -33,7 +33,7 @@ const LoginPage = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
-      <button onClick={() => navigate('/register')}>Register</button>
+      <button onClick={() => history.push('/register')}>Register</button>
     </div>
   );
 };

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const handleRegister = async () => {
     try {
       await axios.post('/api/user/register', { username, password });
-      navigate('/login');
+      history.push('/login');
     } catch (error) {
       console.error('Error registering', error);
     }
