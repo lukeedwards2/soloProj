@@ -1,24 +1,3 @@
-//import { takeLatest, call, put } from 'redux-saga/effects';
-//import axios from 'axios';
-
-// function* loginUser(action) {
-//   try {
-//     const response = yield call(axios.post, '/api/user/login', action.payload);
-//     yield put({ type: 'LOGIN_SUCCESS', payload: response.data });
-//   } catch (error) {
-//     yield put({ type: 'LOGIN_FAILURE', error: error.message });
-//   }
-// }
-
-// function* watchUserSaga() {
-//   yield takeLatest('LOGIN_REQUEST', loginUser);
-
-
-//export default watchUserSaga;
-
-
-
-
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
@@ -34,7 +13,7 @@ function* fetchUser() {
     // allow the server session to recognize the user
     // If a user is logged in, this will return their information
     // from the server session (req.user)
-    const response = yield axios.get('/api/user/login', config);
+    const response = yield axios.get('/api/user', config);
 
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let

@@ -21,6 +21,13 @@ const initialState = {
           ...state,
           error: action.error,
         };
+        case 'UPDATE_BET_SUCCESS':
+          return {
+            ...state,
+            activeBets: state.activeBets.map((bet) =>
+              bet.id === action.payload.id ? action.payload : bet
+            ),
+          };
       default:
         return state;
     }

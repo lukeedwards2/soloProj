@@ -13,6 +13,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ActiveBetsPage from '../ActiveBetsPage/ActiveBetsPage';
 import AddBetPage from '../AddBetPage/AddBetPage';
 import BetHistoryPage from '../BetHistoryPage/BetHistoryPage';
+import Nav from '../Nav/Nav';
 
 
 import './App.css';
@@ -29,6 +30,7 @@ function App() {
   return (
     <Router>
       <div>
+        <Nav />
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
           <Redirect exact from="/" to="/home" />
@@ -73,9 +75,22 @@ function App() {
             }
           </Route>
 
-          <Route path="/active-bets" element={<ActiveBetsPage />} />
-          <Route path="/add-bet" element={<AddBetPage />} />
-          <Route path="/bet-history" element={<BetHistoryPage />} />
+          <Route path="/active-bets">
+            {
+              user.id ?
+              // If somebody is logged in, show this:
+              <ActiveBetsPage />
+              :
+              // Nobody is logged in, redirect to /login:
+              <Redirect to="/login" />
+            }
+          </Route>
+          <Route path="/add-bet">
+            <AddBetPage />
+          </Route>
+          <Route path="/bet-history">
+            <BetHistoryPage />
+          </Route>
 
 
 

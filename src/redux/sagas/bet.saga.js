@@ -19,9 +19,31 @@ function* addBet(action) {
   }
 }
 
+function* updateBet(action) {
+  try {
+    const { id, updatedBetData } = action.payload;
+    const response = yield call(axios.put, `/api/bets/${id}`, updatedBetData);
+    yield put({ type: 'UPDATE_BET_SUCCESS', payload: response.data }); 
+  } catch (error) {
+    yield put({ type: 'BET_OPERATION_FAILURE', error: error.message });
+  }
+}
+
+function* deleteBet(action) {
+  try {
+    const betId = action.payload;
+    yield call(axios.delete, `/api/bets/${betId}`);
+    yield put({ type: 'FETCH_ACTIVE_BETS_REQUEST' }); 
+  } catch (error) {
+    yield put({ type: 'BET_OPERATION_FAILURE', error: error.message });
+  }
+}
+
 function* watchBetSaga() {
   yield takeLatest('FETCH_ACTIVE_BETS_REQUEST', fetchActiveBets);
   yield takeLatest('ADD_BET_REQUEST', addBet);
+  yield takeLatest('UPDATE_BET_REQUEST', updateBet)
+  yield takeLatest('DELETE_BET_REQUEST', deleteBet);
 }
 
 export default watchBetSaga;
